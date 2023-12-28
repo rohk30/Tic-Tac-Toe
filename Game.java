@@ -42,6 +42,7 @@ class TicTacToe implements ActionListener{
         start_play.setFocusable(false);
         start_play.setBorder(BorderFactory.createEtchedBorder());
         start_play.addActionListener(this);
+        start_play.setVisible(true);
 
         frame.add(start_play);
 		
@@ -72,6 +73,7 @@ class TicTacToe implements ActionListener{
 	public void actionPerformed(ActionEvent e) 
     {
         if(e.getSource() == start_play) {
+            System.out.println("Here 2nd");
             frame.getContentPane().removeAll();
             start_play.setVisible(false);
             frame.add(title_panel, BorderLayout.PAGE_START);
@@ -85,6 +87,7 @@ class TicTacToe implements ActionListener{
             button_panel.setVisible(false);
             frame.invalidate();
             repeat();
+            firstTurn();
         } else if(e.getSource() == replay[1]) {         //replay[0] ----> No button to stop play
            textfield.setText("Ok see you again");
            button_panel.setVisible(false);
