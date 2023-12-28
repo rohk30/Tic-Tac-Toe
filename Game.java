@@ -20,7 +20,7 @@ class TicTacToe implements ActionListener{
     JButton[] replay = new JButton[2];
     JTextField textFieldD = new JTextField("Initial Text");
 	boolean player1_turn;
-    int count;
+    int count;                                                  //Count of no of turns that have been played in the specific game
 
     public void repeat()
     {
@@ -83,13 +83,13 @@ class TicTacToe implements ActionListener{
             button_panel.setVisible(true);
             frame.add(button_panel);  
             firstTurn();       
-        } else if(e.getSource() == replay[0]) {
+        } else if(e.getSource() == replay[0]) {         //replay[0] ----> Yes button to play again
             button_panel.removeAll();
             textfield.removeAll();
             button_panel.setVisible(false);
             frame.invalidate();
             repeat();
-        } else if(e.getSource() == replay[1]) {
+        } else if(e.getSource() == replay[1]) {         //replay[0] ----> No button to stop play
            textfield.setText("Ok see you again");
            button_panel.setVisible(false);
            new Thread(() -> {
@@ -101,7 +101,7 @@ class TicTacToe implements ActionListener{
                 SwingUtilities.invokeLater(() -> frame.dispose());
             }).start();
         } else {
-            for(int i=0;i<9;i++) {
+            for(int i=0;i<9;i++) {                      //Checking where each token is placed
                 if(e.getSource()==buttons[i]) {
                     count++;
                     if(player1_turn) {
@@ -260,6 +260,6 @@ public class Game {
 	public static void main(String[] args) {
 
 		TicTacToe tictactoe = new TicTacToe();
-        	
+
 	}
 }
