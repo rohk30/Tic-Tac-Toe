@@ -1,8 +1,4 @@
 //***************************************
-/* 
- in Re-play: Yes --> "Press to start"
- */
-//***************************************
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
