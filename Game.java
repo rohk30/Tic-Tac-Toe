@@ -6,7 +6,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-import java.util.concurrent.*;
 import javax.swing.*;
 
 class TicTacToe implements ActionListener{
@@ -29,7 +28,6 @@ class TicTacToe implements ActionListener{
         player1_turn = true;
         textfield.setBackground(new Color(25,25,25));
 		textfield.setForeground(new Color(25,255,0));
-        //textfield.setBounds(300, 24);
 		textfield.setFont(new Font("Ink Free",Font.BOLD,75));
 		textfield.setHorizontalAlignment(JLabel.CENTER);
 		textfield.setText("Tic-Tac-Toe");
@@ -40,7 +38,6 @@ class TicTacToe implements ActionListener{
 
         title_panel.add(textfield);
         frame.add(title_panel, BorderLayout.PAGE_START);
-
 
         start_play.setBounds(0, 100, 800, 600);
         start_play.addActionListener(this);
@@ -73,7 +70,6 @@ class TicTacToe implements ActionListener{
 		frame.setVisible(true);
 
         repeat();
-		
     }
 
 	@Override
@@ -82,27 +78,23 @@ class TicTacToe implements ActionListener{
         if(e.getSource() == start_play) {
             frame.getContentPane().removeAll();
             start_play.setVisible(false);
-            //start_play.getParent().remove(start_play);
             frame.add(title_panel, BorderLayout.PAGE_START);
             button_panel.setEnabled(true);
             button_panel.setVisible(true);
             frame.add(button_panel);  
             firstTurn();       
-            //SwingUtilities.updateComponentTreeUI(frame);
         } else if(e.getSource() == replay[0]) {
-            //frame.getContentPane().removeAll();
             button_panel.removeAll();
             textfield.removeAll();
             button_panel.setVisible(false);
             frame.invalidate();
             repeat();
         } else if(e.getSource() == replay[1]) {
-           //System.out.println("NO");
            textfield.setText("Ok see you again");
            button_panel.setVisible(false);
            new Thread(() -> {
                 try {
-                    Thread.sleep(1000); // Pause for 3 seconds
+                    Thread.sleep(1000);
                 } catch (InterruptedException er) {
                     er.printStackTrace();
                 }
@@ -133,14 +125,11 @@ class TicTacToe implements ActionListener{
                 }
             }
         }
-		
 	}
 	
 	public void firstTurn() {
-
         textfield.setText("X plays");
         player1_turn = true;
-
 	}
 	
 	public void check() {
@@ -185,7 +174,6 @@ class TicTacToe implements ActionListener{
             buttons[2].getText() != "")) {
 			    winner(2, 4, 6, buttons[2].getText());
 		}
-
         checkDone();
 
 	}
@@ -218,6 +206,7 @@ class TicTacToe implements ActionListener{
 			replay[i].setFocusable(false);
 			replay[i].addActionListener(this);
 		}
+
         replay[0].setForeground(new Color(255,0,0));
 		replay[0].setText("Yes");
 
@@ -235,55 +224,42 @@ class TicTacToe implements ActionListener{
             textfield.setText("Game drawn");
             new Thread(() -> {
                 try {
-                    Thread.sleep(3000); // Pause for 3 seconds
+                    Thread.sleep(2000); 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 SwingUtilities.invokeLater(() -> endGame());
-                //SwingUtilities.invokeLater(() -> endGame("Game Done!!"));
             }).start();
-            //endGame("G);
         } 
+
         if(textfield.getText().equals("X wins") || textfield.getText().equals("O wins")) {
             for(int i=0;i<9;i++) {
                 buttons[i].setEnabled(false);
             }
             new Thread(() -> {
                 try {
-                    Thread.sleep(3000); // Pause for 3 seconds
+                    Thread.sleep(2000); 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 SwingUtilities.invokeLater(() -> textfield.setText("Game Done!!"));
                 try {
-                    Thread.sleep(3000); // Pause for 3 seconds
+                    Thread.sleep(2000); 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 SwingUtilities.invokeLater(() -> endGame());
-                //SwingUtilities.invokeLater(() -> endGame("Game Done!!"));
             }).start();
-            /* new Thread(() -> {
-                try {
-                    Thread.sleep(3000); // Pause for 3 seconds
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                SwingUtilities.invokeLater(() -> endGame());
-                //SwingUtilities.invokeLater(() -> endGame("Game Done!!"));
-            }).start(); */
         }
     } 
-
-
 }
+
 //***************************************
 
 public class Game {
-
 	public static void main(String[] args) {
 
 		TicTacToe tictactoe = new TicTacToe();
-		
+        	
 	}
 }
